@@ -9,7 +9,7 @@ vagrant_synced_folder_default_type: nfs
 # machine name, and IP address for each instance.
 vagrant_hostname: drupalvm.dev
 vagrant_machine_name: drupalvm
-vagrant_ip: 192.168.88.88
+vagrant_ip: 10.5.0.2
 
 # Allow Drupal VM to be accessed via a public network interface on your host.
 # Vagrant boxes are insecure by default, so be careful. You've been warned!
@@ -55,7 +55,7 @@ drush_make_options: "--no-gitinfofile"
 # composer based site deployment strategy.
 build_composer: false
 drupal_composer_path: "{{ config_dir }}/drupal.composer.json"
-drupal_composer_install_dir: "/var/www/drupalvm/drupal"
+drupal_composer_install_dir: "/var/www/drupalvm"
 drupal_composer_dependencies:
   - "drupal/devel:1.x-dev"
 
@@ -73,7 +73,9 @@ install_site: true
 drupal_core_path: "{{ drupal_composer_install_dir }}/web"
 drupal_db_user: drupal
 drupal_db_password: drupal
-drupal_db_name: drupal
+drupal_db_name: "{{ vagrant_machine_name }}"
+drupal_mysql_user: root
+drupal_mysql_password: password
 
 # Settings for installing a Drupal site if 'install_site:' is 'true'.
 drupal_major_version: 8
@@ -90,6 +92,9 @@ drupal_site_install_extra_args: []
 # Cron jobs are added to the vagrant user's crontab. Keys include name
 # (required), minute, hour, day, weekday, month, job (required), and state.
 drupalvm_cron_jobs: []
+  # - name: "Drupal Cron"
+  #   minute: "*/30"
+  #   job: "drush -r {{ drupal_core_path }} core-cron"
 
 # Drupal VM automatically creates a drush alias file in your ~/.drush folder if
 # this variable is 'true'.
@@ -128,7 +133,6 @@ apache_vhosts:
     documentroot: "{{ dashboard_install_dir }}"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
-apache_packages_state: latest
 apache_remove_default_vhost: true
 apache_mods_enabled:
   - expires.load
@@ -199,14 +203,15 @@ installed_extras:
   # - memcached
   # - newrelic
   # - nodejs
+  - npm
   - pimpmylog
   # - redis
   # - ruby
   # - selenium
-  # - solr
-  # - upload-progress
-  - varnish
-  # - xdebug
+  - solr
+  - upload-progress
+  # - varnish
+  - xdebug
   # - xhprof
 
 # Add any extra apt or yum packages you would like installed.
@@ -233,8 +238,6 @@ firewall_allowed_tcp_ports:
   - "8983"
   - "9200"
 firewall_log_dropped_packets: false
-firewall_disable_firewalld: true
-firewall_disable_ufw: true
 
 # PHP Configuration. Currently-supported versions: 5.6, 7.0, 7.1.
 # See version-specific notes: http://docs.drupalvm.com/en/latest/other/php/
@@ -270,7 +273,7 @@ post_provision_scripts: []
   # - "../examples/scripts/configure-solr.sh"
 
 # MySQL Configuration.
-mysql_root_password: root
+mysql_root_password: password
 mysql_slow_query_log_enabled: true
 mysql_slow_query_time: 2
 mysql_wait_timeout: 300
