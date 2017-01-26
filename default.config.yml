@@ -62,7 +62,7 @@ drupal_composer_dependencies:
 # Set this to 'true' and 'build_makefile', 'build_composer' to 'false' if you
 # are using Composer's create-project as a site deployment strategy.
 build_composer_project: true
-drupal_composer_project_package: "drupal-composer/drupal-project:8.x-dev"
+drupal_composer_project_package: "drupal-composer/drupal-project:7.x-dev"
 drupal_composer_project_options: "--prefer-dist --stability dev --no-interaction"
 
 # Set this to 'false' if you don't need to install drupal (using the drupal_*

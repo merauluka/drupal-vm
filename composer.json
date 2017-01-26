@@ -1,24 +1,63 @@
 {
-    "name": "geerlingguy/drupal-vm",
-    "type": "vm",
-    "description": "A VM for local Drupal development, built with Vagrant + Ansible",
-    "keywords": ["vagrant", "vm", "virtual machine", "drupal"],
-    "homepage": "https://www.drupalvm.com",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Jeff Geerling",
-            "homepage": "http://www.jeffgeerling.com"
-        },
-        {
-            "name": "Oskar Schöldström",
-            "homepage": "http://oxy.fi"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/geerlingguy/drupal-vm/issues",
-        "source": "https://github.com/geerlingguy/drupal-vm",
-        "docs": "http://docs.drupalvm.com"
+  "name": "geerlingguy/drupal-vm",
+  "type": "vm",
+  "description": "A VM for local Drupal development, built with Vagrant + Ansible",
+  "keywords": ["vagrant", "vm", "virtual machine", "drupal"],
+  "homepage": "https://www.drupalvm.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jeff Geerling",
+      "homepage": "http://www.jeffgeerling.com"
     },
-    "require": {}
+    {
+      "name": "Oskar Schöldström",
+      "homepage": "http://oxy.fi"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/geerlingguy/drupal-vm/issues",
+    "source": "https://github.com/geerlingguy/drupal-vm",
+    "docs": "http://docs.drupalvm.com"
+  },
+  "require": {
+    "composer/installers": "^1.2",
+    "drupal-composer/drupal-scaffold": "^2.2",
+    "cweagans/composer-patches": "~1.0",
+    "drupal/core": "~7.0",
+    "drush/drush": "~8.0",
+    "drupal/console": "~1.0",
+    "drupal/config_installer": "^1.3"
+  },
+  "require-dev": {
+    "behat/mink": "~1.7",
+    "behat/mink-goutte-driver": "~1.2",
+    "drush-ops/behat-drush-endpoint": "*",
+    "drupal/drupal-extension": "*",
+    "drupal/drupal-driver": "dev-master",
+    "jcalderonzumba/gastonjs": "~1.0.2",
+    "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
+    "mikey179/vfsStream": "~1.2",
+    "phpunit/phpunit": "~4.8",
+    "symfony/css-selector": "~2.8",
+    "mediacurrent/ci-scripts": "0.5.3",
+    "mediacurrent/ci-tests": "dev-master",
+    "mediacurrent/mis_vagrant": "3.5.1",
+    "joestewart/robo-drupalvm": "^0.1.5",
+    "joestewart/robo-vagrant": "^0.1.4",
+    "boedah/robo-drush": "^2.2",
+    "drupal/coder": "~7.0"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "installer-paths": {
+      "web/sites/all/modules/contrib/{$name}": ["type:drupal-module"],
+      "web/sites/all/themes/contrib/{$name}": ["type:drupal-theme"],
+      "drush/contrib/{$name}": ["type:drupal-drush"]
+    }
+  }
 }
