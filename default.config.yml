@@ -195,7 +195,7 @@ postgresql_users:
 installed_extras:
   - adminer
   # - blackfire
-  - drupalconsole
+  # - drupalconsole
   - drush
   # - elasticsearch
   # - java
@@ -208,8 +208,8 @@ installed_extras:
   # - redis
   # - ruby
   # - selenium
-  - solr
-  - upload-progress
+  # - solr
+  # - upload-progress
   # - varnish
   - xdebug
   # - xhprof
