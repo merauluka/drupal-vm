@@ -17,7 +17,7 @@
   when: not drupal_site_exists
   become: no
   environment:
-      COMPOSER_PROCESS_TIMEOUT: 1200
+      COMPOSER_PROCESS_TIMEOUT: 2400
 
 - name: Install dependencies with composer require.
   command: >
